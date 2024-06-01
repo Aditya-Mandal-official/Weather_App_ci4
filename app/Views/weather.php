@@ -8,7 +8,7 @@
 </head>
 <body class="bg-body-secondary">
     <div class="container">
-        <h2 class="text-center py-4">Weather App</h2>
+        <h2 class="text-center py-4">Weather App <a href="<?= base_url('/logout') ?>">Logout</a> </h2> 
         <div class="row">
             <div class="text-danger mb-0" ></div>
             <form class="col-lg-4 d-flex" id="getWeather">

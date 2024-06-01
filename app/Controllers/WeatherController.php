@@ -47,43 +47,29 @@ class WeatherController extends BaseController
     }
     private function saveWeatherData($data){
         $weatherModel = new WeatherModel();
-        // $weatherData = [
-        //     'city' => $data['location']['name'],
-        //     'region' => $data['location']['region'],
-        //     'country' => $data['location']['country'],
-        //     'temperature' => $data['current']['temp_c'],
-        //     'condition' => $data['current']['condition']['text'],
-        //     'humidity' => $data['current']['humidity'],
-        //     'wind' => $data['current']['wind_kph'],
-        //     'fetched_at' => date('Y-m-d H:i:s')
-        // ];
-        
-        // $weatherModel->save($weatherData);
         $city = $data['location']['name'];
 
-    // Check if the weather data for the given city and current date already exists
-    $existingWeather = $weatherModel->where('city', $city)->first();
+        $existingWeather = $weatherModel->where('city', $city)->first();
 
-    $weatherData = [
-        'city' => $data['location']['name'],
-        'region' => $data['location']['region'],
-        'country' => $data['location']['country'],
-        'temperature' => $data['current']['temp_c'],
-        'condition' => $data['current']['condition']['text'],
-        'humidity' => $data['current']['humidity'],
-        'wind' => $data['current']['wind_kph'],
-        'fetched_at' => date('Y-m-d H:i:s')
-    ];
+        $weatherData = [
+            'city' => $data['location']['name'],
+            'region' => $data['location']['region'],
+            'country' => $data['location']['country'],
+            'temperature' => $data['current']['temp_c'],
+            'condition' => $data['current']['condition']['text'],
+            'humidity' => $data['current']['humidity'],
+            'wind' => $data['current']['wind_kph'],
+            'fetched_at' => date('Y-m-d H:i:s')
+        ];
 
-    if ($existingWeather) {
-        // Update the existing record
-        $weatherModel->update($existingWeather['id'], $weatherData);
-        return false; // Indicate that the record was updated
-    } else {
-        // Insert new record
-        $weatherModel->save($weatherData);
-        return true; // Indicate that a new record was inserted
-    }
+        if ($existingWeather) {
+            $weatherModel->update($existingWeather['id'], $weatherData);
+            return false;
+        } else {
+            // Insert new record
+            $weatherModel->save($weatherData);
+            return true;
+        }
 
     }
     private function sendWeatherEmail($data){
