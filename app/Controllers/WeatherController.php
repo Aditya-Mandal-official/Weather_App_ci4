@@ -75,8 +75,8 @@ class WeatherController extends BaseController
     private function sendWeatherEmail($data){
         $email = service('email');
 
-        $email->setFrom('adityamandalweb@gmail.com', 'Aditya Mandal');
-        $email->setTo('adityamandal8617@gmail.com');
+        $email->setFrom('adityamandalfrom@gmail.com', 'Aditya Mandal');
+        $email->setTo('adityamandalrecieved@gmail.com');
 
         $email->setSubject('Weather Report for ' . $data['location']['name']);
         $email->setMessage('<p>Temperature: ' . $data['current']['temp_c'] . ' °C</p>' .
